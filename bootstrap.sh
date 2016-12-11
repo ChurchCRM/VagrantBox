@@ -68,3 +68,16 @@ sudo locale-gen sq_AL
 sudo locale-gen sv_SE
 sudo locale-gen zh_CN
 sudo locale-gen zh_TW
+
+echo "=========================================================="
+echo "==========   Add Ruby and ChangeLog Generator ============"
+echo "=========================================================="
+
+sudo apt-get install -y ruby
+gem install multi_json github_changelog_generator
+
+echo "=========================================================="
+echo "==========   Updating Vagrant Private Key     ============"
+echo "=========================================================="
+
+wget https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub > ~/.ssh/authorized_keys
