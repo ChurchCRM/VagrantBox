@@ -2,7 +2,8 @@
 
 ## Current Box:
   
-  * VirtualBox Integration Tools 5.1.10
+  *  VirtualBox Integration Tools 5.1.10
+  *  PHP 7.0 (from  ppa:ondrej/php)
 
   *  MD5:  2AE423D3EE961350526BC111C913B940
   *  SHA1: 1A9C1DBCF52573421BDC97B11863BC1C5A6B7B06
