@@ -73,8 +73,8 @@ echo "=========================================================="
 echo "==========   Add Ruby and ChangeLog Generator ============"
 echo "=========================================================="
 
-sudo apt-get install -y ruby ruby-full
-gem install multi_json github_changelog_generator
+sudo apt-get install -y ruby
+gem install multi_json github_changelog_generator sass
 
 echo "=========================================================="
 echo "==========   Updating Vagrant Private Key     ============"
