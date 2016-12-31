@@ -73,7 +73,7 @@ echo "=========================================================="
 echo "==========   Add Ruby and ChangeLog Generator ============"
 echo "=========================================================="
 
-sudo apt-get install -y ruby
+sudo apt-get install -y ruby ruby-full
 gem install multi_json github_changelog_generator
 
 echo "=========================================================="
