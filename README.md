@@ -13,6 +13,7 @@
   1.  Clone this repository
   2.  ```vagrant up```
   3.  Ensure that VirtualBox Guest addons are up to date
+    * Installing https://github.com/dotless-de/vagrant-vbguest can ensure this.
   4.  Ensure all software in the box is up to date
     *  This should be handled by bootstrap.sh
   5. Ensure that the insecure private key is set
