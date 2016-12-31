@@ -1,5 +1,7 @@
 # VagrantBox
 
+Download from https://box.churchcrm.io/churchcrm.box
+
 ## Current Box:
   
   *  VirtualBox Integration Tools 5.1.10
