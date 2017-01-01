@@ -3,7 +3,6 @@
 echo "=========================================================="
 echo "==================   disable unused stuff ================"
 echo "=========================================================="
-vag
 sudo chkconfig mongod off
 
 echo "=========================================================="
@@ -11,6 +10,7 @@ echo "================   Configuring PHP7.0 ===================="
 echo "=========================================================="
 sudo service apache2 stop
 sudo add-apt-repository -y ppa:ondrej/php
+sudo rm -f /etc/apt/sources.list.d/ondrej-php5*
 sudo apt-get update
 sudo apt-get install -y php7.0 php7.0-mysql php7.0-xml php7.0-curl php7.0-zip php7.0-mbstring php7.0-gd php7.0-mcrypt
 sudo a2dismod php5
@@ -40,13 +40,6 @@ echo "=========================================================="
 sudo /usr/local/bin/composer self-update
 
 echo "=========================================================="
-echo "=================   MailCatcher Setup  ==================="
-echo "=========================================================="
-
-sudo pkill mailcatcher
-sudo /home/vagrant/.rbenv/versions/2.2.2/bin/mailcatcher --ip 0.0.0.0
-
-echo "=========================================================="
 echo "==========   Add Locals                       ============"
 echo "=========================================================="
 
@@ -69,13 +62,34 @@ sudo locale-gen sv_SE
 sudo locale-gen zh_CN
 sudo locale-gen zh_TW
 
-echo "=========================================================="
-echo "==========   Add Ruby and ChangeLog Generator ============"
-echo "=========================================================="
+echo "====================================="
+echo "==========   Update Ruby ============"
+echo "====================================="
 
-sudo apt-get remove -y ruby ruby-full
-sudo apt-get install -y ruby2.0
-gem install multi_json github_changelog_generator sass
+
+sudo pkill mailcatcher
+
+sudo apt-get remove -y ruby
+rbenv uninstall -f 2.2.2
+rm -rf /home/vagrant/.rbenv
+
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+\curl -sSL https://get.rvm.io | bash -s stable --ruby
+source /usr/local/rvm/scripts/rvm
+
+echo -e "\n\nsource /usr/local/rvm/scripts/rvm" >> /etc/bash.bashrc
+
+sudo sed -i 's/^export PATH="\$HOME\/\.rbenv\/bin:\$PATH"$//g' /home/vagrant/.bashrc
+sudo sed -i 's/^eval "\$(rbenv init -)"//g' /home/vagrant/.bashrc
+sudo sed -i 's/^export PATH="\$HOME\/\.rbenv\/plugins\/ruby-build\/bin:\$PATH"$//g' /home/vagrant/.bashrc
+
+echo "=============================================================="
+echo "==========   Install ChangeLog Generator and SASS ============"
+echo "=============================================================="
+
+gem install compass multi_json github_changelog_generator sass mailcatcher
+
+/usr/local/rvm/gems/ruby-2.3.3/bin/mailcatcher --ip 0.0.0.0
 
 echo "=========================================================="
 echo "==========   Updating Vagrant Private Key     ============"
