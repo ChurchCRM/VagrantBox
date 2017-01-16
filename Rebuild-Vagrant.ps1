@@ -26,3 +26,5 @@ Write-Host "SHA1: $sha1"
 Write-Host "MD5: $md5"
 vagrant box remove ChurchCRM/box -f
 vagrant box add .\churchcrm.box --name ChurchCRM/box
+Write-Host "Destroying vagrant environment for clean up"
+vagrant destroy -f
