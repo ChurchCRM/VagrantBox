@@ -7,8 +7,8 @@ Download from https://box.churchcrm.io/churchcrm.box
   *  VirtualBox Integration Tools 5.1.10
   *  PHP 7.0 (from  ppa:ondrej/php)
 
-  *  MD5:  5975F2995D0175CC34E6DA6D4E0EDAF4
-  *  SHA1: 14D215133E9C32AAFC9422111DBE6719D61CC654
+  *  MD5:  C0D3156B6584D559E7DBE1C45D08F273
+  *  SHA1: 62B39AF45FD56BC96FF1094AD9D87E311A66C529
 
 ## Updating the box:
 

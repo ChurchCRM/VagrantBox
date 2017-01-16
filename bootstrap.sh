@@ -20,8 +20,9 @@ sudo service apache2 start
 echo "=========================================================="
 echo "==================   Apache Setup  ======================="
 echo "=========================================================="
-sudo sed -i 's/^upload_max_filesize.*$/upload_max_filesize = 2G/g' /etc/php7/apache2/php.ini
-sudo sed -i 's/^post_max_size.*$/post_max_size = 2G/g' /etc/php7/apache2/php.ini
+sudo sed -i 's/^upload_max_filesize.*$/upload_max_filesize = 2G/g' /etc/php/7.0/apache2/php.ini
+sudo sed -i 's/^post_max_size.*$/post_max_size = 2G/g' /etc/php/7.0/apache2/php.ini
+sudo sed -i 's/^memory_limit.*$/memory_limit = 2G/g' /etc/php/7.0/apache2/php.ini
 sudo sed -i 's/\/var\/www.*$/\/var\/www\/public/g' /etc/apache2/sites-available/default-ssl.conf
 sudo a2enmod ssl
 sudo a2ensite default-ssl
