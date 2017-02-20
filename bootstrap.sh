@@ -9,6 +9,7 @@ echo "=========================================================="
 echo "================   Configuring PHP7.0 ===================="
 echo "=========================================================="
 sudo service apache2 stop
+sudo apt-get install software-properties-common
 sudo add-apt-repository -y ppa:ondrej/php
 sudo rm -f /etc/apt/sources.list.d/ondrej-php5*
 sudo apt-get update
