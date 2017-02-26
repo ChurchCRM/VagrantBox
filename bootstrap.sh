@@ -105,7 +105,7 @@ echo "=========================================================="
 echo "================   ChurchCRM Branding    ================="
 echo "=========================================================="
 version=`cat /vagrant/version`
-sudo sed -i 's/^DISTRIB_DESCRIPTION="/DISTRIB_DESCRIPTION="ChurchCRM\/box\($version) - /g' /etc/lsb-release
+sudo sed -i 's/^DISTRIB_DESCRIPTION="/DISTRIB_DESCRIPTION="ChurchCRM\/box\('$version') - /g' /etc/lsb-release
 
 echo "=========================================================="
 echo "==========   Updating Vagrant Private Key     ============"
