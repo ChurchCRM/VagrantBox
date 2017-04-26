@@ -1,27 +1,25 @@
 #!/usr/bin/env bash
 
 echo "=========================================================="
-echo "==================   disable unused stuff ================"
-echo "=========================================================="
-sudo chkconfig mongod off
-
-
-echo "=========================================================="
 echo "================  Update Base System  ===================="
 echo "=========================================================="
-sudo rm -f /etc/apt/sources.list.d/ondrej-php5*
 sudo apt-get update
 sudo apt-get dist-upgrade -y
+
+
+echo "=========================================================="
+echo "==============   Configuring MySQL 5.7 ==================="
+echo "=========================================================="
+MYSQL_ROOT_PASSWORD='vagrant'
+echo debconf mysql-server/root_password password $MYSQL_ROOT_PASSWORD | sudo debconf-set-selections
+echo debconf mysql-server/root_password_again password $MYSQL_ROOT_PASSWORD | sudo debconf-set-selections
+
+sudo apt-get install -y mysql-server mysql-client
 
 echo "=========================================================="
 echo "================   Configuring PHP7.0 ===================="
 echo "=========================================================="
-sudo service apache2 stop
-sudo apt-get install software-properties-common
-sudo add-apt-repository -y ppa:ondrej/php
-sudo apt-get update
-sudo apt-get install -y php7.0 php7.0-mysql php7.0-xml php7.0-curl php7.0-zip php7.0-mbstring php7.0-gd php7.0-mcrypt
-sudo a2dismod php5
+sudo apt-get install -y software-properties-common apache2 php7.0 php7.0-mysql php7.0-xml php7.0-curl php7.0-zip php7.0-mbstring php7.0-gd php7.0-mcrypt libapache2-mod-php7.0
 sudo a2enmod php7.0
 sudo service apache2 start
 
@@ -49,7 +47,14 @@ echo "=========================================================="
 sudo /usr/local/bin/composer self-update
 
 echo "=========================================================="
-echo "==========   Add Locals                       ============"
+echo "=====================   Node JS    ======================="
+echo "=========================================================="
+
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+echo "=========================================================="
+echo "==========   Add Locales                       ============"
 echo "=========================================================="
 
 sudo locale-gen de_DE

@@ -1,5 +1,6 @@
 Write-Host "Destroying existing vagrant environment for fresh start"
 vagrant destroy -f
+vagrant box update
 $buildBox = {
     Set-Location $args[0]
     vagrant up
