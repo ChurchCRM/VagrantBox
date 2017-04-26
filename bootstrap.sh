@@ -26,10 +26,12 @@ sudo service apache2 start
 echo "=========================================================="
 echo "==================   Apache Setup  ======================="
 echo "=========================================================="
+sudo mv /var/www/html /var/www/public
 sudo sed -i 's/^upload_max_filesize.*$/upload_max_filesize = 2G/g' /etc/php/7.0/apache2/php.ini
 sudo sed -i 's/^post_max_size.*$/post_max_size = 2G/g' /etc/php/7.0/apache2/php.ini
 sudo sed -i 's/^memory_limit.*$/memory_limit = 2G/g' /etc/php/7.0/apache2/php.ini
 sudo sed -i 's/\/var\/www.*$/\/var\/www\/public/g' /etc/apache2/sites-available/default-ssl.conf
+sudo sed -i 's/\/var\/www.*$/\/var\/www\/public/g' /etc/apache2/sites-available/000-default.conf
 sudo a2enmod ssl
 sudo a2ensite default-ssl
 sudo service apache2 restart
@@ -101,14 +103,15 @@ echo "=============================================================="
 echo "==========   Install ChangeLog Generator and SASS ============"
 echo "=============================================================="
 
-gem install compass multi_json github_changelog_generator sass mailcatcher
+#gem install compass multi_json github_changelog_generator sass mailcatcher
 
-/usr/local/rvm/gems/ruby-2.3.3/bin/mailcatcher --ip 0.0.0.0
+#/usr/local/rvm/gems/ruby-2.4.0/bin/mailcatcher --ip 0.0.0.0
 
 
 echo "=========================================================="
 echo "================   ChurchCRM Branding    ================="
 echo "=========================================================="
+#Display's ChurchCRM/box(version) at 'lsb_release -a'
 version=`cat /vagrant/version`
 sudo sed -i 's/^DISTRIB_DESCRIPTION="/DISTRIB_DESCRIPTION="ChurchCRM\/box\('$version') - /g' /etc/lsb-release
 
