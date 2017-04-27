@@ -1,0 +1,10 @@
+[Unit]
+Description=Start x11vnc at startup.
+After=xvfb.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/x11vnc --display :10 --forever --loop -noxdamage -repeat -rfbport 5900 -shared
+
+[Install]
+WantedBy=multi-user.target

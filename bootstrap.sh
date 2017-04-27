@@ -107,6 +107,19 @@ echo "=============================================================="
 
 #/usr/local/rvm/gems/ruby-2.4.0/bin/mailcatcher --ip 0.0.0.0
 
+echo "=============================================================="
+echo "================   Install Selenium WebDriver ================"
+echo "=============================================================="
+sudoapt-get install xvfb x11vnc firefox openjdk-8-jdk
+sudo mkdir /opt/selenium
+sudo cp ./selenium/* /opt/selenium/
+sudo ln -s /opt/selenium/xvfb.service /etc/systemd/system/xvfb.service
+sudo ln -s /opt/selenium/x11vnc.service /etc/systemd/system/x11vnc.service
+sudo systemctl daemon-reload
+sudo service xvfb start
+sudo service x11vnc start
+sudo wget http://selenium-release.storage.googleapis.com/2.43/selenium-server-standalone-2.43.1.jar -O /opt/selenium/selenium-server.jar
+
 
 echo "=========================================================="
 echo "================   ChurchCRM Branding    ================="
