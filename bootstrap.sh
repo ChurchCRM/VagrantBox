@@ -110,9 +110,9 @@ echo "=============================================================="
 echo "=============================================================="
 echo "================   Install Selenium WebDriver ================"
 echo "=============================================================="
-sudo apt-get install xvfb x11vnc firefox openjdk-8-jdk
+sudo apt-get install -y xvfb x11vnc firefox openjdk-8-jdk
 sudo mkdir /opt/selenium
-sudo cp ./selenium/* /opt/selenium/
+sudo cp /vagrant/selenium/* /opt/selenium/
 sudo ln -s /opt/selenium/xvfb.service /etc/systemd/system/xvfb.service
 sudo ln -s /opt/selenium/x11vnc.service /etc/systemd/system/x11vnc.service
 sudo ln -s /opt/selenium/webdriver.service /etc/systemd/system/webdriver.service
