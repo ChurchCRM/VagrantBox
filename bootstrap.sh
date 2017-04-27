@@ -110,15 +110,19 @@ echo "=============================================================="
 echo "=============================================================="
 echo "================   Install Selenium WebDriver ================"
 echo "=============================================================="
-sudoapt-get install xvfb x11vnc firefox openjdk-8-jdk
+sudo apt-get install xvfb x11vnc firefox openjdk-8-jdk
 sudo mkdir /opt/selenium
 sudo cp ./selenium/* /opt/selenium/
 sudo ln -s /opt/selenium/xvfb.service /etc/systemd/system/xvfb.service
 sudo ln -s /opt/selenium/x11vnc.service /etc/systemd/system/x11vnc.service
+sudo ln -s /opt/selenium/webdriver.service /etc/systemd/system/webdriver.service
 sudo systemctl daemon-reload
 sudo service xvfb start
 sudo service x11vnc start
-sudo wget http://selenium-release.storage.googleapis.com/2.43/selenium-server-standalone-2.43.1.jar -O /opt/selenium/selenium-server.jar
+sudo service webdriver start
+sudo wget https://goo.gl/s4o9Vx -O /opt/selenium/selenium-server.jar
+sudo wget  https://github.com/mozilla/geckodriver/releases/download/v0.16.1/geckodriver-v0.16.1-linux64.tar.gz -O /opt/selenium/gecko.tar.gz
+sudo tar -xzvf /opt/selenium/gecko.tar.gz -C /opt/selenium/
 
 
 echo "=========================================================="

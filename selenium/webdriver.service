@@ -4,7 +4,7 @@ After=xvfb.service
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/x11vnc --display :10 --forever --loop -noxdamage -repeat -rfbport 5900 -shared
+ExecStart=/usr/bin/java -Dwebdriver.gecko.driver=/opt/selenium/geckodriver -jar /opt/selenium/selenium-server.jar -port 4443
 
 [Install]
 WantedBy=multi-user.target
