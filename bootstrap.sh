@@ -6,6 +6,24 @@ echo "=========================================================="
 sudo apt-get -qq update
 sudo apt-get -qq dist-upgrade -y
 
+echo "=========================================================="
+echo "=======   Applying System Configuration    ==============="
+echo "=========================================================="
+#Display's ChurchCRM/box(version) at 'lsb_release -a'
+echo "Updating lsb-release"
+version=`cat /vagrant/version`
+sudo sed -i 's/^DISTRIB_DESCRIPTION="/DISTRIB_DESCRIPTION="ChurchCRM\/box\('$version') - /g' /etc/lsb-release
+echo "Creating Vagrant user"
+sudo useradd -m vagrant -s /bin/bash -d /home/vagrant
+sudo usermod -aG sudo vagrant
+echo -e "vagrant\nvagrant" | sudo passwd vagrant
+echo "vagrant ALL=(ALL) NOPASSWD: ALL" >>/etc/sudoers
+
+echo "Updating SSH Key as per https://www.vagrantup.com/docs/boxes/base.html"
+sudo curl -o /home/vagrant/.ssh/authorized_keys -s https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub
+chown vagrant:vagrant /home/vagrant/.ssh/authorized_keys
+
+exit
 
 echo "=========================================================="
 echo "==============   Configuring MySQL 5.7 ==================="
@@ -119,12 +137,12 @@ wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.de
 sudo dpkg -i /tmp/google-chrome*.deb
 
 echo "Downloading Selenium Server"
-sudo wget https://goo.gl/s4o9Vx -q -O /opt/selenium/selenium-server.jar
+sudo wget -q https://goo.gl/s4o9Vx -O /opt/selenium/selenium-server.jar
 echo "Downloading Gecko Driver"
-sudo wget  https://github.com/mozilla/geckodriver/releases/download/v0.16.1/geckodriver-v0.16.1-linux64.tar.gz -q -O /tmp/gecko.tar.gz
+sudo wget -q  https://github.com/mozilla/geckodriver/releases/download/v0.16.1/geckodriver-v0.16.1-linux64.tar.gz -O /tmp/gecko.tar.gz
 sudo tar -xzvf /tmp/gecko.tar.gz -C /opt/selenium/
 echo "Downloading Chrome Driver"
-sudo wget https://chromedriver.storage.googleapis.com/2.29/chromedriver_linux64.zip -O /tmp/chrome.zip
+sudo wget -q https://chromedriver.storage.googleapis.com/2.29/chromedriver_linux64.zip -O /tmp/chrome.zip
 sudo unzip /tmp/chrome.zip -d /opt/selenium/
 
 echo "Configuring Xvfb, X11vnc, and Webdriver as Systemd services"
@@ -139,16 +157,3 @@ echo "Starting services"
 sudo service xvfb start
 sudo service x11vnc start
 sudo service webdriver start
-
-echo "=========================================================="
-echo "================   ChurchCRM Branding    ================="
-echo "=========================================================="
-#Display's ChurchCRM/box(version) at 'lsb_release -a'
-version=`cat /vagrant/version`
-sudo sed -i 's/^DISTRIB_DESCRIPTION="/DISTRIB_DESCRIPTION="ChurchCRM\/box\('$version') - /g' /etc/lsb-release
-
-echo "=========================================================="
-echo "==========   Updating Vagrant Private Key     ============"
-echo "=========================================================="
-
-curl https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub > ~/.ssh/authorized_keys
