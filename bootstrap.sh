@@ -120,8 +120,11 @@ sudo systemctl daemon-reload
 sudo service xvfb start
 sudo service x11vnc start
 sudo service webdriver start
-sudo wget https://goo.gl/s4o9Vx -O /opt/selenium/selenium-server.jar
-sudo wget  https://github.com/mozilla/geckodriver/releases/download/v0.16.1/geckodriver-v0.16.1-linux64.tar.gz -O /opt/selenium/gecko.tar.gz
+
+echo "Downloading Selenium Server"
+sudo wget https://goo.gl/s4o9Vx -q -O /opt/selenium/selenium-server.jar
+echo "Downloading GeckoDriver"
+sudo wget  https://github.com/mozilla/geckodriver/releases/download/v0.16.1/geckodriver-v0.16.1-linux64.tar.gz -q -O /opt/selenium/gecko.tar.gz
 sudo tar -xzvf /opt/selenium/gecko.tar.gz -C /opt/selenium/
 
 
@@ -136,4 +139,4 @@ echo "=========================================================="
 echo "==========   Updating Vagrant Private Key     ============"
 echo "=========================================================="
 
-wget https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub > ~/.ssh/authorized_keys
+curl https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub > ~/.ssh/authorized_keys

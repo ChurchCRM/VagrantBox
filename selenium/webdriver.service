@@ -4,6 +4,7 @@ After=xvfb.service
 
 [Service]
 Type=simple
+Environment=DISPLAY=:10
 ExecStart=/usr/bin/java -Dwebdriver.gecko.driver=/opt/selenium/geckodriver -jar /opt/selenium/selenium-server.jar -port 4443
 
 [Install]
