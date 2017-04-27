@@ -3,8 +3,8 @@
 echo "=========================================================="
 echo "================  Update Base System  ===================="
 echo "=========================================================="
-sudo apt-get update
-sudo apt-get dist-upgrade -y
+sudo apt-get -qq update
+sudo apt-get -qq dist-upgrade -y
 
 
 echo "=========================================================="
@@ -14,12 +14,12 @@ MYSQL_ROOT_PASSWORD='vagrant'
 echo debconf mysql-server/root_password password $MYSQL_ROOT_PASSWORD | sudo debconf-set-selections
 echo debconf mysql-server/root_password_again password $MYSQL_ROOT_PASSWORD | sudo debconf-set-selections
 
-sudo apt-get install -y mysql-server mysql-client
+sudo apt-get -qq install -y mysql-server mysql-client
 
 echo "=========================================================="
 echo "================   Configuring PHP7.0 ===================="
 echo "=========================================================="
-sudo apt-get install -y software-properties-common apache2 php7.0 php7.0-mysql php7.0-xml php7.0-curl php7.0-zip php7.0-mbstring php7.0-gd php7.0-mcrypt libapache2-mod-php7.0
+sudo apt-get -qq install -y software-properties-common apache2 php7.0 php7.0-mysql php7.0-xml php7.0-curl php7.0-zip php7.0-mbstring php7.0-gd php7.0-mcrypt libapache2-mod-php7.0
 sudo a2enmod php7.0
 sudo service apache2 start
 
@@ -53,7 +53,7 @@ echo "=====================   Node JS    ======================="
 echo "=========================================================="
 
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-sudo apt-get install -y nodejs
+sudo apt-get -qq install -y nodejs
 
 echo "=========================================================="
 echo "==========   Add Locales                       ============"
@@ -85,7 +85,7 @@ echo "====================================="
 
 sudo pkill mailcatcher
 
-sudo apt-get remove -y ruby
+sudo apt-get -qq remove -y ruby
 rbenv uninstall -f 2.2.2
 rm -rf /home/vagrant/.rbenv
 
@@ -110,7 +110,7 @@ echo "=============================================================="
 echo "=============================================================="
 echo "================   Install Selenium WebDriver ================"
 echo "=============================================================="
-sudo apt-get install -y xvfb x11vnc firefox openjdk-8-jdk
+sudo apt-get -qq install -y xvfb x11vnc firefox openjdk-8-jdk
 sudo mkdir /opt/selenium
 sudo cp /vagrant/selenium/* /opt/selenium/
 sudo ln -s /opt/selenium/xvfb.service /etc/systemd/system/xvfb.service
