@@ -13,5 +13,5 @@ Vagrant.configure("2") do |config|
   config.vm.network "private_network", ip: "192.168.33.99"
   config.vm.hostname = "scotchbox"
   config.vm.provision :shell, :path => "bootstrap.sh"
-#  config.vbguest.auto_update = false
+  config.vbguest.auto_update = false
 end

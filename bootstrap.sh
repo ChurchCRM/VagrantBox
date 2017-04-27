@@ -110,7 +110,24 @@ echo "=============================================================="
 echo "=============================================================="
 echo "================   Install Selenium WebDriver ================"
 echo "=============================================================="
-sudo apt-get -qq install -y xvfb x11vnc firefox openjdk-8-jdk
+ 
+echo "Installing Firefox and Prerequisites"
+sudo apt-get -qq install -y xvfb x11vnc firefox openjdk-8-jdk libxss1 libappindicator1 libindicator7 xdg-utils unzip
+
+echo "Installing Google Chrome"
+wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
+sudo dpkg -i /tmp/google-chrome*.deb
+
+echo "Downloading Selenium Server"
+sudo wget https://goo.gl/s4o9Vx -q -O /opt/selenium/selenium-server.jar
+echo "Downloading Gecko Driver"
+sudo wget  https://github.com/mozilla/geckodriver/releases/download/v0.16.1/geckodriver-v0.16.1-linux64.tar.gz -q -O /tmp/gecko.tar.gz
+sudo tar -xzvf /tmp/gecko.tar.gz -C /opt/selenium/
+echo "Downloading Chrome Driver"
+sudo wget https://chromedriver.storage.googleapis.com/2.29/chromedriver_linux64.zip -O /tmp/chrome.zip
+sudo unzip /tmp/chrome.zip -d /opt/selenium/
+
+echo "Configuring Xvfb, X11vnc, and Webdriver as Systemd services"
 sudo mkdir /opt/selenium
 sudo cp /vagrant/selenium/* /opt/selenium/
 sudo ln -s /opt/selenium/xvfb.service /etc/systemd/system/xvfb.service
@@ -118,12 +135,7 @@ sudo ln -s /opt/selenium/x11vnc.service /etc/systemd/system/x11vnc.service
 sudo ln -s /opt/selenium/webdriver.service /etc/systemd/system/webdriver.service
 sudo systemctl daemon-reload
 
-echo "Downloading Selenium Server"
-sudo wget https://goo.gl/s4o9Vx -q -O /opt/selenium/selenium-server.jar
-echo "Downloading GeckoDriver"
-sudo wget  https://github.com/mozilla/geckodriver/releases/download/v0.16.1/geckodriver-v0.16.1-linux64.tar.gz -q -O /opt/selenium/gecko.tar.gz
-sudo tar -xzvf /opt/selenium/gecko.tar.gz -C /opt/selenium/
-
+echo "Starting services"
 sudo service xvfb start
 sudo service x11vnc start
 sudo service webdriver start

@@ -4,8 +4,10 @@ After=xvfb.service
 
 [Service]
 Type=simple
+User=ubuntu
+Group=ubuntu
 Environment=DISPLAY=:10
-ExecStart=/usr/bin/java -Dwebdriver.gecko.driver=/opt/selenium/geckodriver -jar /opt/selenium/selenium-server.jar -port 4443
+ExecStart=/usr/bin/java -Dwebdriver.chrome.driver=/opt/selenium/chromedriver -Dwebdriver.gecko.driver=/opt/selenium/geckodriver -jar /opt/selenium/selenium-server.jar -port 4443
 
 [Install]
 WantedBy=multi-user.target
