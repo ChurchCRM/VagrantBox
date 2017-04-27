@@ -117,9 +117,6 @@ sudo ln -s /opt/selenium/xvfb.service /etc/systemd/system/xvfb.service
 sudo ln -s /opt/selenium/x11vnc.service /etc/systemd/system/x11vnc.service
 sudo ln -s /opt/selenium/webdriver.service /etc/systemd/system/webdriver.service
 sudo systemctl daemon-reload
-sudo service xvfb start
-sudo service x11vnc start
-sudo service webdriver start
 
 echo "Downloading Selenium Server"
 sudo wget https://goo.gl/s4o9Vx -q -O /opt/selenium/selenium-server.jar
@@ -127,6 +124,9 @@ echo "Downloading GeckoDriver"
 sudo wget  https://github.com/mozilla/geckodriver/releases/download/v0.16.1/geckodriver-v0.16.1-linux64.tar.gz -q -O /opt/selenium/gecko.tar.gz
 sudo tar -xzvf /opt/selenium/gecko.tar.gz -C /opt/selenium/
 
+sudo service xvfb start
+sudo service x11vnc start
+sudo service webdriver start
 
 echo "=========================================================="
 echo "================   ChurchCRM Branding    ================="
