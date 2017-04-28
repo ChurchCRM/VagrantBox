@@ -29,7 +29,7 @@ sudo apt-get -qq dist-upgrade -y
 echo "=========================================================="
 echo "==============   Configuring MySQL 5.7 ==================="
 echo "=========================================================="
-MYSQL_ROOT_PASSWORD='vagrant'
+MYSQL_ROOT_PASSWORD='root'
 echo debconf mysql-server/root_password password $MYSQL_ROOT_PASSWORD | sudo debconf-set-selections
 echo debconf mysql-server/root_password_again password $MYSQL_ROOT_PASSWORD | sudo debconf-set-selections
 
@@ -46,12 +46,11 @@ echo "=========================================================="
 echo "==================   Apache Setup  ======================="
 echo "=========================================================="
 sudo mv /var/www/html /var/www/public
+sudo cp /vagrant/apache/* /etc/apache2/sites-enabled/
 sudo sed -i 's/^upload_max_filesize.*$/upload_max_filesize = 2G/g' /etc/php/7.0/apache2/php.ini
 sudo sed -i 's/^post_max_size.*$/post_max_size = 2G/g' /etc/php/7.0/apache2/php.ini
 sudo sed -i 's/^memory_limit.*$/memory_limit = 2G/g' /etc/php/7.0/apache2/php.ini
-sudo sed -i 's/\/var\/www.*$/\/var\/www\/public/g' /etc/apache2/sites-available/default-ssl.conf
-sudo sed -i 's/\/var\/www.*$/\/var\/www\/public/g' /etc/apache2/sites-available/000-default.conf
-sudo a2enmod ssl
+sudo a2enmod ssl rewrite
 sudo a2ensite default-ssl
 sudo service apache2 restart
 
