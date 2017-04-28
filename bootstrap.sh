@@ -1,12 +1,6 @@
 #!/usr/bin/env bash
 
 echo "=========================================================="
-echo "================  Update Base System  ===================="
-echo "=========================================================="
-sudo apt-get -qq update
-sudo apt-get -qq dist-upgrade -y
-
-echo "=========================================================="
 echo "=======   Applying System Configuration    ==============="
 echo "=========================================================="
 #Display's ChurchCRM/box(version) at 'lsb_release -a'
@@ -20,10 +14,20 @@ echo -e "vagrant\nvagrant" | sudo passwd vagrant
 echo "vagrant ALL=(ALL) NOPASSWD: ALL" >>/etc/sudoers
 
 echo "Updating SSH Key as per https://www.vagrantup.com/docs/boxes/base.html"
+sudo mkdir /home/vagrant/.ssh
 sudo curl -o /home/vagrant/.ssh/authorized_keys -s https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub
-chown vagrant:vagrant /home/vagrant/.ssh/authorized_keys
+sudo chown -R vagrant:vagrant /home/vagrant/.ssh
+chmod 0700 /home/vagrant/.ssh
+chmod 0600 /home/vagrant/.ssh/authorized_keys
+
 
 exit
+
+echo "=========================================================="
+echo "================  Update Base System  ===================="
+echo "=========================================================="
+sudo apt-get -qq update
+sudo apt-get -qq dist-upgrade -y
 
 echo "=========================================================="
 echo "==============   Configuring MySQL 5.7 ==================="
