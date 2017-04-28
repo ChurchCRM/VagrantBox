@@ -20,9 +20,6 @@ sudo chown -R vagrant:vagrant /home/vagrant/.ssh
 chmod 0700 /home/vagrant/.ssh
 chmod 0600 /home/vagrant/.ssh/authorized_keys
 
-
-exit
-
 echo "=========================================================="
 echo "================  Update Base System  ===================="
 echo "=========================================================="
@@ -132,9 +129,10 @@ echo "=============================================================="
 echo "=============================================================="
 echo "================   Install Selenium WebDriver ================"
 echo "=============================================================="
- 
+sudo mkdir /opt/selenium
+
 echo "Installing Firefox and Prerequisites"
-sudo apt-get -qq install -y xvfb x11vnc firefox openjdk-8-jdk libxss1 libappindicator1 libindicator7 xdg-utils unzip
+sudo apt-get -qq install -y xvfb x11vnc firefox openjdk-8-jdk libxss1 libappindicator1 libindicator7 xdg-utils unzip fonts-liberation libpango1.0-0
 
 echo "Installing Google Chrome"
 wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
@@ -150,7 +148,6 @@ sudo wget -q https://chromedriver.storage.googleapis.com/2.29/chromedriver_linux
 sudo unzip /tmp/chrome.zip -d /opt/selenium/
 
 echo "Configuring Xvfb, X11vnc, and Webdriver as Systemd services"
-sudo mkdir /opt/selenium
 sudo cp /vagrant/selenium/* /opt/selenium/
 sudo ln -s /opt/selenium/xvfb.service /etc/systemd/system/xvfb.service
 sudo ln -s /opt/selenium/x11vnc.service /etc/systemd/system/x11vnc.service
