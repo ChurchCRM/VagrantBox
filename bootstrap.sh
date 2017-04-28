@@ -157,3 +157,5 @@ echo "Starting services"
 sudo service xvfb start
 sudo service x11vnc start
 sudo service webdriver start
+
+sudo apt-get clean
