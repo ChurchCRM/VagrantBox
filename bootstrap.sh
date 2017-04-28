@@ -35,6 +35,7 @@ echo debconf mysql-server/root_password_again password $MYSQL_ROOT_PASSWORD | su
 
 sudo apt-get -qq install -y mysql-server mysql-client
 
+
 echo "=========================================================="
 echo "================   Configuring PHP7.0 ===================="
 echo "=========================================================="
@@ -121,7 +122,7 @@ echo "=============================================================="
 echo "==========   Install ChangeLog Generator and SASS ============"
 echo "=============================================================="
 
-#gem install compass multi_json github_changelog_generator sass mailcatcher
+gem install compass multi_json github_changelog_generator sass mailcatcher
 
 #/usr/local/rvm/gems/ruby-2.4.0/bin/mailcatcher --ip 0.0.0.0
 
