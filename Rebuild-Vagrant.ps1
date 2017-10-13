@@ -24,7 +24,7 @@ $sha1 = Get-FileHash -Algorithm SHA1 .\churchcrm.box
 Write-Host "New Box Created $($PSScriptRoot)\churchcrm.box"
 Write-Host "SHA1: $sha1"
 Write-Host "MD5: $md5"
-vagrant box remove ChurchCRM/box -f
-vagrant box add .\churchcrm.box --name ChurchCRM/box
+vagrant box remove ChurchCRM/box1.2 -f
+vagrant box add .\churchcrm.box --name ChurchCRM/box1.2
 Write-Host "Destroying vagrant environment for clean up"
 vagrant destroy -f

@@ -10,8 +10,6 @@ echo "================   Configuring PHP7.0 ===================="
 echo "=========================================================="
 sudo service apache2 stop
 sudo apt-get install software-properties-common
-sudo add-apt-repository -y ppa:ondrej/php
-sudo rm -f /etc/apt/sources.list.d/ondrej-php5*
 sudo apt-get update
 sudo apt-get install -y php7.0 php7.0-mysql php7.0-xml php7.0-curl php7.0-zip php7.0-mbstring php7.0-gd php7.0-mcrypt
 sudo a2dismod php5
@@ -40,6 +38,12 @@ echo "=================   Composer Update    ==================="
 echo "=========================================================="
 
 sudo /usr/local/bin/composer self-update
+
+echo "=========================================================="
+echo "=================   Node Update    ==================="
+echo "=========================================================="
+
+sudo n latest
 
 echo "=========================================================="
 echo "==========   Add Locals                       ============"
