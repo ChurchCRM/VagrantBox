@@ -1,0 +1,13 @@
+[Unit]
+Description=Start Selenium WebDriver at startup
+After=xvfb.service
+
+[Service]
+Type=simple
+User=vagrant
+Group=vagrant
+Environment=DISPLAY=:10
+ExecStart=/usr/bin/java -Dwebdriver.chrome.driver=/opt/selenium/chromedriver -Dwebdriver.gecko.driver=/opt/selenium/geckodriver -jar /opt/selenium/selenium-server.jar -port 4443
+
+[Install]
+WantedBy=multi-user.target
