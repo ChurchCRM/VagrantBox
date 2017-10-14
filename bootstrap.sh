@@ -11,9 +11,8 @@ echo "=========================================================="
 sudo service apache2 stop
 sudo apt-get install software-properties-common
 sudo add-apt-repository -y ppa:ondrej/php
-sudo rm -f /etc/apt/sources.list.d/ondrej-php5*
 sudo apt-get update
-sudo apt-get install -y php7.0 php7.0-mysql php7.0-xml php7.0-curl php7.0-zip php7.0-mbstring php7.0-gd php7.0-mcrypt
+sudo apt-get install -y php7.0 php7.0-mysql php7.0-xml php7.0-curl php7.0-zip php7.0-mbstring php7.0-gd libapache2-mod-php7.0 libphp7.0-embed libssl-dev openssl php7.0-cgi php7.0-cli php7.0-common php7.0-dev php7.0-fpm php7.0-phpdbg php7.0-xml php7.0-mcrypt
 sudo a2dismod php5
 sudo a2enmod php7.0
 sudo service apache2 start
@@ -40,6 +39,13 @@ echo "=================   Composer Update    ==================="
 echo "=========================================================="
 
 sudo /usr/local/bin/composer self-update
+
+echo "=========================================================="
+echo "=================   Node Update    ==================="
+echo "=========================================================="
+
+sudo n stable
+sudo rm -rf /usr/local/lib/node_modules/
 
 echo "=========================================================="
 echo "==========   Add Locals                       ============"
@@ -70,20 +76,7 @@ echo "====================================="
 
 
 sudo pkill mailcatcher
-
-sudo apt-get remove -y ruby
-rbenv uninstall -f 2.2.2
-rm -rf /home/vagrant/.rbenv
-
-gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-\curl -sSL https://get.rvm.io | bash -s stable --ruby
-source /usr/local/rvm/scripts/rvm
-
-echo -e "\n\nsource /usr/local/rvm/scripts/rvm" >> /etc/bash.bashrc
-
-sudo sed -i 's/^export PATH="\$HOME\/\.rbenv\/bin:\$PATH"$//g' /home/vagrant/.bashrc
-sudo sed -i 's/^eval "\$(rbenv init -)"//g' /home/vagrant/.bashrc
-sudo sed -i 's/^export PATH="\$HOME\/\.rbenv\/plugins\/ruby-build\/bin:\$PATH"$//g' /home/vagrant/.bashrc
+sudo apt-get install -y ruby-sass
 
 echo "=============================================================="
 echo "==========   Install ChangeLog Generator and SASS ============"
