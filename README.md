@@ -4,8 +4,9 @@ Download from https://box.churchcrm.io/churchcrm.box
 
 ## Current Box:
   
+  *  Based on ScotchBox 3.0
   *  VirtualBox Integration Tools 5.1.10
-  *  PHP 7.0 (from  ppa:ondrej/php)
+  *  PHP 7.0 
 
   *  MD5:  C0D3156B6584D559E7DBE1C45D08F273
   *  SHA1: 62B39AF45FD56BC96FF1094AD9D87E311A66C529
