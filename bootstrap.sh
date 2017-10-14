@@ -9,8 +9,8 @@ echo "=========================================================="
 echo "================   Configuring PHP7.0 ===================="
 echo "=========================================================="
 sudo service apache2 stop
-sudo add-apt-repository -y ppa:ondrej/php
 sudo apt-get install software-properties-common
+sudo add-apt-repository -y ppa:ondrej/php
 sudo apt-get update
 sudo apt-get install -y php7.0 php7.0-mysql php7.0-xml php7.0-curl php7.0-zip php7.0-mbstring php7.0-gd libapache2-mod-php7.0 libphp7.0-embed libssl-dev openssl php7.0-cgi php7.0-cli php7.0-common php7.0-dev php7.0-fpm php7.0-phpdbg php7.0-xml php7.0-mcrypt
 sudo a2dismod php5
