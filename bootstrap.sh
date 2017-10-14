@@ -44,7 +44,7 @@ echo "=========================================================="
 echo "=================   Node Update    ==================="
 echo "=========================================================="
 
-sudo n latest
+sudo n stable
 sudo rm -rf /usr/local/lib/node_modules/
 
 echo "=========================================================="
@@ -76,20 +76,7 @@ echo "====================================="
 
 
 sudo pkill mailcatcher
-
-sudo apt-get remove -y ruby
-rbenv uninstall -f 2.2.2
-rm -rf /home/vagrant/.rbenv
-
-gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-\curl -sSL https://get.rvm.io | bash -s stable --ruby
-source /usr/local/rvm/scripts/rvm
-
-echo -e "\n\nsource /usr/local/rvm/scripts/rvm" >> /etc/bash.bashrc
-
-sudo sed -i 's/^export PATH="\$HOME\/\.rbenv\/bin:\$PATH"$//g' /home/vagrant/.bashrc
-sudo sed -i 's/^eval "\$(rbenv init -)"//g' /home/vagrant/.bashrc
-sudo sed -i 's/^export PATH="\$HOME\/\.rbenv\/plugins\/ruby-build\/bin:\$PATH"$//g' /home/vagrant/.bashrc
+sudo apt-get install -y ruby-sass
 
 echo "=============================================================="
 echo "==========   Install ChangeLog Generator and SASS ============"
