@@ -46,6 +46,8 @@ echo "=========================================================="
 
 sudo n stable
 sudo rm -rf /usr/local/lib/node_modules/
+sudo npm install -g npm@latest
+sudo npm install -g grunt-cli@latest
 
 echo "=========================================================="
 echo "==========   Add Locals                       ============"
