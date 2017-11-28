@@ -3,8 +3,8 @@
 echo "=========================================================="
 echo "================  Update Base System  ===================="
 echo "=========================================================="
-sudo apt-get -qq update
-sudo apt-get -qq dist-upgrade -y
+#sudo apt-get -qq update
+#sudo apt-get -qq dist-upgrade -y
 
 echo "=========================================================="
 echo "==================   disable unused stuff ================"
@@ -18,6 +18,12 @@ echo "=========================================================="
 echo "Updating lsb-release"
 version=`cat /vagrant/version`
 sudo sed -i 's/^DISTRIB_DESCRIPTION="/DISTRIB_DESCRIPTION="ChurchCRM\/box\('$version') - /g' /etc/lsb-release
+
+
+echo "=========================================================="
+echo "==========   Updating Vagrant Private Key     ============"
+echo "=========================================================="
+#
 echo "Creating Vagrant user"
 sudo useradd -m vagrant -s /bin/bash -d /home/vagrant
 sudo usermod -aG sudo vagrant
@@ -26,10 +32,12 @@ echo "vagrant ALL=(ALL) NOPASSWD: ALL" >>/etc/sudoers
 
 echo "Updating SSH Key as per https://www.vagrantup.com/docs/boxes/base.html"
 sudo mkdir /home/vagrant/.ssh
-sudo curl -o /home/vagrant/.ssh/authorized_keys -s https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub
+wget https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub > /home/vagrant/.ssh/authorized_keys
 sudo chown -R vagrant:vagrant /home/vagrant/.ssh
 chmod 0700 /home/vagrant/.ssh
 chmod 0600 /home/vagrant/.ssh/authorized_keys
+
+exit 
 
 echo "=========================================================="
 echo "==============   Configuring MySQL 5.7 ==================="
@@ -123,9 +131,3 @@ echo "=============================================================="
 gem install compass multi_json github_changelog_generator sass mailcatcher
 
 /usr/local/rvm/gems/ruby-2.3.3/bin/mailcatcher --ip 0.0.0.0
-
-echo "=========================================================="
-echo "==========   Updating Vagrant Private Key     ============"
-echo "=========================================================="
-
-wget https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub > ~/.ssh/authorized_keys
