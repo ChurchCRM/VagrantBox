@@ -1,6 +1,6 @@
 Write-Host "Destroying existing vagrant environment for fresh start"
 $TargetBoxFileName = "$PSScriptRoot\churchcrm.box"
-$TargetBoxName = "ChurchCRM/box1.2"
+$TargetBoxName = "ChurchCRM/box1.3"
 vagrant destroy -f
 $buildBox = {
     Set-Location $args[0]
@@ -28,5 +28,5 @@ Write-Host "SHA1: $sha1"
 Write-Host "MD5: $md5"
 vagrant box remove $TargetBoxName -f
 vagrant box add $TargetBoxFileName --name $TargetBoxName
-Write-Host "Destroying vagrant environment for clean up"
+#Write-Host "Destroying vagrant environment for clean up"
 #vagrant destroy -f

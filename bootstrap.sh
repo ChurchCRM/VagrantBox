@@ -31,11 +31,16 @@ echo -e "vagrant\nvagrant" | sudo passwd vagrant
 echo "vagrant ALL=(ALL) NOPASSWD: ALL" >>/etc/sudoers
 
 echo "Updating SSH Key as per https://www.vagrantup.com/docs/boxes/base.html"
-sudo mkdir /home/vagrant/.ssh
-wget https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub > /home/vagrant/.ssh/authorized_keys
-sudo chown -R vagrant:vagrant /home/vagrant/.ssh
+sudo mkdir -p /home/vagrant/.ssh
 chmod 0700 /home/vagrant/.ssh
+wget --no-check-certificate \
+    https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub \
+    -O /home/vagrant/.ssh/authorized_keys
+    
 chmod 0600 /home/vagrant/.ssh/authorized_keys
+chown -R vagrant /home/vagrant/.ssh
+sudo sed -i 's@^#AuthorizedKeysFile.*$@AuthorizedKeysFile %h/.ssh/authorized_keys@g' /etc/ssh/sshd_config
+sudo service ssh restart
 
 exit 
 
