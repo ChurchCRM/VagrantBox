@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
 echo "=========================================================="
-echo "==================   updates ================"
+echo "================  Update Base System  ===================="
 echo "=========================================================="
-sudo apt-get update
-sudo apt-get autoremove -y
-sudo apt-get dist-upgrade -y
+sudo apt-get -qq update
+sudo apt-get -qq dist-upgrade -y
 
 echo "=========================================================="
 echo "==================   disable unused stuff ================"
@@ -13,25 +12,51 @@ echo "=========================================================="
 sudo chkconfig mongod off
 
 echo "=========================================================="
+echo "=======   Applying System Configuration    ==============="
+echo "=========================================================="
+#Display's ChurchCRM/box(version) at 'lsb_release -a'
+echo "Updating lsb-release"
+version=`cat /vagrant/version`
+sudo sed -i 's/^DISTRIB_DESCRIPTION="/DISTRIB_DESCRIPTION="ChurchCRM\/box\('$version') - /g' /etc/lsb-release
+echo "Creating Vagrant user"
+sudo useradd -m vagrant -s /bin/bash -d /home/vagrant
+sudo usermod -aG sudo vagrant
+echo -e "vagrant\nvagrant" | sudo passwd vagrant
+echo "vagrant ALL=(ALL) NOPASSWD: ALL" >>/etc/sudoers
+
+echo "Updating SSH Key as per https://www.vagrantup.com/docs/boxes/base.html"
+sudo mkdir /home/vagrant/.ssh
+sudo curl -o /home/vagrant/.ssh/authorized_keys -s https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub
+sudo chown -R vagrant:vagrant /home/vagrant/.ssh
+chmod 0700 /home/vagrant/.ssh
+chmod 0600 /home/vagrant/.ssh/authorized_keys
+
+echo "=========================================================="
+echo "==============   Configuring MySQL 5.7 ==================="
+echo "=========================================================="
+MYSQL_ROOT_PASSWORD='root'
+echo debconf mysql-server/root_password password $MYSQL_ROOT_PASSWORD | sudo debconf-set-selections
+echo debconf mysql-server/root_password_again password $MYSQL_ROOT_PASSWORD | sudo debconf-set-selections
+
+sudo apt-get -qq install -y mysql-server mysql-client
+
+
+echo "=========================================================="
 echo "================   Configuring PHP7.0 ===================="
 echo "=========================================================="
-sudo service apache2 stop
-sudo apt-get install software-properties-common
-sudo add-apt-repository -y ppa:ondrej/php
-sudo apt-get update
-sudo apt-get install -y php7.0 php7.0-mysql php7.0-xml php7.0-curl php7.0-zip php7.0-mbstring php7.0-gd libapache2-mod-php7.0 libphp7.0-embed libssl-dev openssl php7.0-cgi php7.0-cli php7.0-common php7.0-dev php7.0-fpm php7.0-phpdbg php7.0-xml php7.0-mcrypt
-sudo a2dismod php5
+sudo apt-get -qq install -y software-properties-common apache2 php7.0 php7.0-mysql php7.0-xml php7.0-curl php7.0-zip php7.0-mbstring php7.0-gd php7.0-mcrypt libapache2-mod-php7.0
 sudo a2enmod php7.0
 sudo service apache2 start
 
 echo "=========================================================="
 echo "==================   Apache Setup  ======================="
 echo "=========================================================="
+sudo mv /var/www/html /var/www/public
+sudo cp /vagrant/apache/* /etc/apache2/sites-enabled/
 sudo sed -i 's/^upload_max_filesize.*$/upload_max_filesize = 2G/g' /etc/php/7.0/apache2/php.ini
 sudo sed -i 's/^post_max_size.*$/post_max_size = 2G/g' /etc/php/7.0/apache2/php.ini
 sudo sed -i 's/^memory_limit.*$/memory_limit = 2G/g' /etc/php/7.0/apache2/php.ini
-sudo sed -i 's/\/var\/www.*$/\/var\/www\/public/g' /etc/apache2/sites-available/default-ssl.conf
-sudo a2enmod ssl
+sudo a2enmod ssl rewrite
 sudo a2ensite default-ssl
 sudo service apache2 restart
 
