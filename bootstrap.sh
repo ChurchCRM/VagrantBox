@@ -109,7 +109,9 @@ sudo locale-gen zh_TW
 echo "====================================="
 echo "==========   Update Ruby ============"
 echo "====================================="
-
+sudo apt-get -qq remove -y ruby
+rbenv uninstall -f 2.2.2
+rm -rf /home/vagrant/.rbenv
 
 sudo pkill mailcatcher
 sudo apt-get install -y ruby-sass
