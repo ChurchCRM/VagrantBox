@@ -44,7 +44,9 @@ echo "=========================================================="
 echo "=================   Node Update    ==================="
 echo "=========================================================="
 
-sudo n stable
+sudo npm install -g n@latest
+sudo n 8.9.1
+sudo n rm 5.0.0
 sudo rm -rf /usr/local/lib/node_modules/
 sudo npm install -g npm@latest
 sudo npm install -g grunt-cli@latest
