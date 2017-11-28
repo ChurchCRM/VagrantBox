@@ -123,17 +123,12 @@ sudo locale-gen zh_TW
 echo "====================================="
 echo "==========   Update Ruby ============"
 echo "====================================="
-sudo apt-get -qq remove -y ruby
-rbenv uninstall -f 2.2.2
-rm -rf /home/vagrant/.rbenv
 
-sudo pkill mailcatcher
-sudo apt-get install -y ruby-sass
+sudo apt-get -qq install -y ruby gcc rubygems ruby-all-dev build-essential libsqlite3-dev
 
 echo "=============================================================="
 echo "==========   Install ChangeLog Generator and SASS ============"
 echo "=============================================================="
 
-gem install compass multi_json github_changelog_generator sass mailcatcher
-
+sudo gem install rake compass multi_json github_changelog_generator sass mailcatcher
 /usr/local/rvm/gems/ruby-2.3.3/bin/mailcatcher --ip 0.0.0.0
