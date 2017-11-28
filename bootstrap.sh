@@ -42,8 +42,6 @@ chown -R vagrant /home/vagrant/.ssh
 sudo sed -i 's@^#AuthorizedKeysFile.*$@AuthorizedKeysFile %h/.ssh/authorized_keys@g' /etc/ssh/sshd_config
 sudo service ssh restart
 
-exit 
-
 echo "=========================================================="
 echo "==============   Configuring MySQL 5.7 ==================="
 echo "=========================================================="
@@ -76,7 +74,7 @@ sudo service apache2 restart
 echo "=========================================================="
 echo "====================   DB Setup  ========================="
 echo "=========================================================="
-sudo sed -i 's/^bind-address.*$/bind-address=0.0.0.0/g' /etc/mysql/my.cnf
+sudo sed -i 's/^bind-address.*$/bind-address=0.0.0.0/g' /etc/mysql/mysql.conf.d/mysqld.cnf
 sudo service mysql restart
 
 echo "=========================================================="
@@ -89,10 +87,10 @@ echo "=========================================================="
 echo "=================   Node Update    ==================="
 echo "=========================================================="
 
-sudo npm install -g n@latest
+sudo apt-get install make
+sudo curl -L https://git.io/n-install | bash
 sudo n 8.9.1
-sudo n rm 5.0.0
-sudo rm -rf /usr/local/lib/node_modules/
+sudo n rm 9.2.0
 sudo npm install -g npm@latest
 sudo npm install -g grunt-cli@latest
 
