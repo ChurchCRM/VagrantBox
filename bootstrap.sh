@@ -88,11 +88,10 @@ echo "=================   Node Update    ==================="
 echo "=========================================================="
 
 sudo apt-get -qq install -y make
-wget --no-check-certificate \
-    https://git.io/n-install  \
-    -O /tmp/n-install.sh
-sudo chmod a+x /tmp/n-install.sh
-sudo /tmp/n-install.sh -y
+cd ~
+git clone https://github.com/tj/n.git
+cd n
+sudo make install
 sudo n 8.9.1
 sudo n rm 9.2.0
 sudo npm install -g npm@latest
