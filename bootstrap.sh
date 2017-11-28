@@ -55,7 +55,9 @@ sudo apt-get -qq install -y mysql-server mysql-client
 echo "=========================================================="
 echo "================   Configuring PHP7.0 ===================="
 echo "=========================================================="
-sudo apt-get -qq install -y software-properties-common apache2 php7.0 php7.0-mysql php7.0-xml php7.0-curl php7.0-zip php7.0-mbstring php7.0-gd php7.0-mcrypt libapache2-mod-php7.0
+sudo apt-get -qq install -y software-properties-common apache2 
+
+sudo apt-get -qq install -y php7.0 php7.0-mysql php7.0-xml php7.0-curl php7.0-gd libapache2-mod-php7.0
 sudo a2enmod php7.0
 sudo service apache2 start
 
@@ -131,4 +133,3 @@ echo "==========   Install ChangeLog Generator and SASS ============"
 echo "=============================================================="
 
 sudo gem install rake compass multi_json github_changelog_generator sass mailcatcher
-/usr/local/rvm/gems/ruby-2.3.3/bin/mailcatcher --ip 0.0.0.0
