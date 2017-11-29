@@ -144,3 +144,5 @@ sudo dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
 sudo chmod 0600 /var/swap.1 
 sudo mkswap /var/swap.1
 sudo swapon /var/swap.1
+
+echo "/var/swap.1   swap    swap    sw  0   0" | sudo tee --append /etc/fstab
