@@ -58,8 +58,6 @@ echo "=========================================================="
 sudo apt-get -qq install -y software-properties-common apache2 
 
 sudo apt-get -qq install -y php7.0 php7.0-mysql php7.0-xml php7.0-curl php7.0-gd libapache2-mod-php7.0 php7.0-mcrypt php7.0-mbstring
-sudo a2enmod php7.0 
-sudo service apache2 start
 
 echo "=========================================================="
 echo "==================   Apache Setup  ======================="
@@ -69,6 +67,8 @@ sudo cp /vagrant/apache/* /etc/apache2/sites-enabled/
 sudo sed -i 's/^upload_max_filesize.*$/upload_max_filesize = 2G/g' /etc/php/7.0/apache2/php.ini
 sudo sed -i 's/^post_max_size.*$/post_max_size = 2G/g' /etc/php/7.0/apache2/php.ini
 sudo sed -i 's/^memory_limit.*$/memory_limit = 2G/g' /etc/php/7.0/apache2/php.ini
+sudo sed -i 's/^memory_limit.*$/memory_limit = 2G/g' /etc/php/7.0/cli/php.ini
+sudo a2enmod php7.0 
 sudo a2enmod ssl rewrite
 sudo a2ensite default-ssl
 sudo service apache2 restart
@@ -136,3 +136,11 @@ echo "==========   Install ChangeLog Generator and SASS ============"
 echo "=============================================================="
 
 sudo gem install rake compass multi_json github_changelog_generator sass mailcatcher
+
+echo "======================================"
+echo "==========   Add Swapfile ============"
+echo "======================================"
+sudo dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
+sudo chmod 0600 /var/swap.1 
+sudo mkswap /var/swap.1
+sudo swapon /var/swap.1
