@@ -3,7 +3,7 @@
 echo "=========================================================="
 echo "================  Update Base System  ===================="
 echo "=========================================================="
-#sudo apt-get -qq update
+sudo apt-get -qq update
 #sudo apt-get -qq dist-upgrade -y
 
 echo "=========================================================="
@@ -57,8 +57,8 @@ echo "================   Configuring PHP7.0 ===================="
 echo "=========================================================="
 sudo apt-get -qq install -y software-properties-common apache2 
 
-sudo apt-get -qq install -y php7.0 php7.0-mysql php7.0-xml php7.0-curl php7.0-gd libapache2-mod-php7.0
-sudo a2enmod php7.0
+sudo apt-get -qq install -y php7.0 php7.0-mysql php7.0-xml php7.0-curl php7.0-gd libapache2-mod-php7.0 php7.0-mcrypt php7.0-mbstring
+sudo a2enmod php7.0 
 sudo service apache2 start
 
 echo "=========================================================="
@@ -83,6 +83,7 @@ echo "=========================================================="
 echo "=================   Composer Update    ==================="
 echo "=========================================================="
 
+sudo apt-get -qq install -y composer
 sudo /usr/local/bin/composer self-update
 
 echo "=========================================================="
