@@ -131,11 +131,12 @@ echo "====================================="
 
 sudo apt-get -qq install -y ruby gcc rubygems ruby-all-dev build-essential libsqlite3-dev
 
-echo "=============================================================="
-echo "==========   Install ChangeLog Generator and SASS ============"
-echo "=============================================================="
+echo "================================================================================"
+echo "==========   Install ChangeLog Generator SASS and Other Build Tools ============"
+echo "================================================================================"
 
 sudo gem install rake compass multi_json github_changelog_generator sass mailcatcher
+sudo apt-get -qq install -y gettext
 
 echo "======================================"
 echo "==========   Add Swapfile ============"
