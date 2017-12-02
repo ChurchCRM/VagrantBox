@@ -101,6 +101,7 @@ sudo n 8.9.1
 sudo n rm 9.2.0
 sudo npm install -g npm@latest
 sudo npm install -g grunt-cli@latest
+sudo npm install -g i18next-extract-gettext
 
 echo "=========================================================="
 echo "==========   Add Locals                       ============"
