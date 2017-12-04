@@ -131,6 +131,8 @@ sudo locale-gen sq_AL
 sudo locale-gen sv_SE
 sudo locale-gen zh_CN
 sudo locale-gen zh_TW
+sudo locale-gen th_TH
+sudo locale-gen ar_EG
 
 echo "====================================="
 echo "==========   Update Ruby ============"
