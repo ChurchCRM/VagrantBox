@@ -1,14 +1,12 @@
 #!/usr/bin/env bash
 
+echo $(whoami)
+
 echo "=========================================================="
 echo "================  Update Base System  ===================="
 echo "=========================================================="
 sudo apt-get -qq update
 #sudo apt-get -qq dist-upgrade -y
-
-# Suggested for dev to not require sudo with npm -g
-sudo chmod -R a+rwx /usr/local/
-
 
 echo "=========================================================="
 echo "==================   disable unused stuff ================"
@@ -103,10 +101,13 @@ cd n
 make install
 n 8.9.1
 n rm 9.2.0
+# Suggested for dev to not require sudo with npm -g
+sudo chmod -R a+rwx /usr/local/
+sudo chmod -R a+rwx /root
 npm install -g npm@latest
 npm install -g grunt-cli@latest
 npm install -g i18next-extract-gettext
-npm install -g iltorb@latest
+sudo npm install -g iltorb@latest --unsafe-perm=true
 
 echo "=========================================================="
 echo "==========   Add Locals                       ============"
