@@ -6,6 +6,10 @@ echo "=========================================================="
 sudo apt-get -qq update
 #sudo apt-get -qq dist-upgrade -y
 
+# Suggested for dev to not require sudo with npm -g
+sudo chmod -R a+rwx /usr/local/
+
+
 echo "=========================================================="
 echo "==================   disable unused stuff ================"
 echo "=========================================================="
@@ -96,12 +100,13 @@ sudo apt-get -qq install -y make
 cd ~
 git clone https://github.com/tj/n.git
 cd n
-sudo make install
-sudo n 8.9.1
-sudo n rm 9.2.0
-sudo npm install -g npm@latest
-sudo npm install -g grunt-cli@latest
-sudo npm install -g i18next-extract-gettext
+make install
+n 8.9.1
+n rm 9.2.0
+npm install -g npm@latest
+npm install -g grunt-cli@latest
+npm install -g i18next-extract-gettext
+npm install -g iltorb@latest
 
 echo "=========================================================="
 echo "==========   Add Locals                       ============"
