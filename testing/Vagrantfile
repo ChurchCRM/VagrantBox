@@ -1,0 +1,18 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+##################################################
+#
+# Startup vagrant on 192.168.33.99
+# Map the src dir to the default httpd www/public dir
+
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "ChurchCRM/box1.3"
+  config.vm.network "private_network", ip: "192.168.33.100"
+  config.vm.hostname = "churchcrm"
+  #config.vm.provision :shell, :path => "bootstrap.sh"
+  config.ssh.insert_key = false
+  config.vbguest.auto_update = false
+end
