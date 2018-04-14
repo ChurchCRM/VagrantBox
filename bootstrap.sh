@@ -58,8 +58,9 @@ echo "=========================================================="
 echo "================   Configuring PHP7.0 ===================="
 echo "=========================================================="
 sudo apt-get -qq install -y software-properties-common apache2 
+sudo add-apt-repository ppa:ondrej/php
 
-sudo apt-get -qq install -y php7.0 php7.0-mysql php7.0-xml php7.0-curl php7.0-gd libapache2-mod-php7.0 php7.0-mcrypt php7.0-mbstring
+sudo apt-get -qq install -y php7.1 php7.1-mysql php7.1-xml php7.1-curl php7.1-gd libapache2-mod-php7.1 php7.1-mcrypt  php7.1-mbstring php7.1-common  php7.1-xmlrpc php7.1-soap php7.1-intl php7.1-cli php7.1-zip 
 
 echo "=========================================================="
 echo "==================   Apache Setup  ======================="
