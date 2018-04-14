@@ -55,10 +55,11 @@ sudo apt-get -qq install -y mysql-server mysql-client
 
 
 echo "=========================================================="
-echo "================   Configuring PHP7.0 ===================="
+echo "================   Configuring PHP7.1 ===================="
 echo "=========================================================="
 sudo apt-get -qq install -y software-properties-common apache2 
-sudo add-apt-repository ppa:ondrej/php
+sudo add-apt-repository ppa:ondrej/php -y
+sudo apt-get update
 
 sudo apt-get -qq install -y php7.1 php7.1-mysql php7.1-xml php7.1-curl php7.1-gd libapache2-mod-php7.1 php7.1-mcrypt  php7.1-mbstring php7.1-common  php7.1-xmlrpc php7.1-soap php7.1-intl php7.1-cli php7.1-zip 
 
@@ -67,11 +68,11 @@ echo "==================   Apache Setup  ======================="
 echo "=========================================================="
 sudo mv /var/www/html /var/www/public
 sudo cp /vagrant/apache/* /etc/apache2/sites-enabled/
-sudo sed -i 's/^upload_max_filesize.*$/upload_max_filesize = 2G/g' /etc/php/7.0/apache2/php.ini
-sudo sed -i 's/^post_max_size.*$/post_max_size = 2G/g' /etc/php/7.0/apache2/php.ini
-sudo sed -i 's/^memory_limit.*$/memory_limit = 2G/g' /etc/php/7.0/apache2/php.ini
-sudo sed -i 's/^memory_limit.*$/memory_limit = 2G/g' /etc/php/7.0/cli/php.ini
-sudo a2enmod php7.0 
+sudo sed -i 's/^upload_max_filesize.*$/upload_max_filesize = 2G/g' /etc/php/7.1/apache2/php.ini
+sudo sed -i 's/^post_max_size.*$/post_max_size = 2G/g' /etc/php/7.1/apache2/php.ini
+sudo sed -i 's/^memory_limit.*$/memory_limit = 2G/g' /etc/php/7.1/apache2/php.ini
+sudo sed -i 's/^memory_limit.*$/memory_limit = 2G/g' /etc/php/7.1/cli/php.ini
+sudo a2enmod php7.1
 sudo a2enmod ssl rewrite
 sudo a2ensite default-ssl
 sudo service apache2 restart
