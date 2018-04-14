@@ -4,23 +4,17 @@ Download from https://box.churchcrm.io/churchcrm.box
 
 ## Current Box:
   
-  *  Based on ScotchBox 3.0
-  *  VirtualBox Integration Tools 5.1.10
-  *  PHP 7.0 
+  *  Based on Ubuntu/Xenial64
+  *  PHP 7.1
 
-  *  MD5:  C0D3156B6584D559E7DBE1C45D08F273
-  *  SHA1: 62B39AF45FD56BC96FF1094AD9D87E311A66C529
+  *  SHA1: F00C98DBF4DF621958BE4107FACC9E4A3D4E8C15
 
 ## Updating the box:
 
   1.  Clone this repository
-  2.  ```vagrant up```
-  3.  Ensure that VirtualBox Guest addons are up to date
-    * Installing https://github.com/dotless-de/vagrant-vbguest can ensure this.
-  4.  Ensure all software in the box is up to date
-    *  This should be handled by bootstrap.sh
-  5. Ensure that the insecure private key is set
-  6.  ```vagrant package --output churchcrm.box```
+  1.  Udpate the `version` file appropriately
+  1.  Run PowerShell: `./Rebuild-Vagrant.ps1`
+  1.  A New `.box` file will be placed in the working directory
   
 ### References
   *  https://box.scotch.io/
